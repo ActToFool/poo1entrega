@@ -10,5 +10,6 @@ package Entidades;
  * @author Emanuel Álvarez, Brian Hortua, Andrés Mora, Thomas Rivera
  */
 public class Moneda {
-    
+    int denominacion;
+    int cantidad;
 }
