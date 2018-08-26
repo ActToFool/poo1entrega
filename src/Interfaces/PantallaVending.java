@@ -3,16 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Entidades;
+package Interfaces;
 
-import java.util.ArrayList;
+import Controladores.Vending;
 
 /**
  *
  * @author Emanuel Álvarez, Brian Hortua, Andrés Mora, Thomas Rivera
  */
-public class Venta {
-    Producto productoVendido;
-    ArrayList<Moneda> pagoMonedas;
-    ArrayList<Adicional> adicionalesSeleccionados;
+public class PantallaVending {
+    Vending vending;
+    
 }

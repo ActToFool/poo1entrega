@@ -5,15 +5,22 @@
  */
 package Controladores;
 
+import Entidades.Moneda;
+import Entidades.Producto;
+import Entidades.Venta;
+import java.util.ArrayList;
+
 /**
  *
- * @author brian
+ * @author Emanuel Álvarez, Brian Hortua, Andrés Mora, Thomas Rivera
  */
 public class Vending {
 
-    /**
-     * @param args the command line arguments
-     */
+    GestionProducto gestion;
+    ArrayList<Producto> catalogo;
+    ArrayList<Venta> ventasRealizadas;
+    Venta ventaActual;
+    ArrayList<Moneda> dineroAcumulado;
     public static void main(String[] args) {
         // TODO code application logic here
     }

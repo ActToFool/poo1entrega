@@ -5,10 +5,13 @@
  */
 package Entidades;
 
+import java.util.ArrayList;
+
 /**
  *
- * @author brian
+ * @author Emanuel Álvarez, Brian Hortua, Andrés Mora, Thomas Rivera
  */
 public class Producto {
-    
+    ArrayList<Producto> obsequios;
+    ArrayList<Adicional> adicionalesProducto;
 }

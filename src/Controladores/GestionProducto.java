@@ -7,8 +7,8 @@ package Controladores;
 
 /**
  *
- * @author brian
+ * @author Emanuel Álvarez, Brian Hortua, Andrés Mora, Thomas Rivera
  */
 public class GestionProducto {
-    //Maricas
+    
 }
