@@ -10,6 +10,32 @@ package Entidades;
  * @author Emanuel Álvarez, Brian Hortua, Andrés Mora, Thomas Rivera
  */
 public class Moneda {
-    int denominacion;
-    int cantidad;
+    private int denominacion;
+    private int cantidad;
+    //CONSTRUCTORES
+    public Moneda() {
+    }
+
+    public Moneda(int denominacion, int cantidad) {
+        this.denominacion = denominacion;
+        this.cantidad = cantidad;
+    }
+    //MODIFICADORES
+
+    public int getDenominacion() {
+        return denominacion;
+    }
+
+    public void setDenominacion(int denominacion) {
+        this.denominacion = denominacion;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+    
 }

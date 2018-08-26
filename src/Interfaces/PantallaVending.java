@@ -13,5 +13,20 @@ import Controladores.Vending;
  */
 public class PantallaVending {
     Vending vending;
+    public static void main(String[] args) {
+        //AQUI IBA EL MAIN MARICONES
+        
+    }
+    //CONSTRUCTORES
+    public PantallaVending() {
+    }
+    //MODIFICADORES
+    public Vending getVending() {
+        return vending;
+    }
+    
+    public void setVending(Vending vending) {
+        this.vending = vending;
+    }
     
 }

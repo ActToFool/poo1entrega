@@ -10,5 +10,9 @@ package Controladores;
  * @author Emanuel Álvarez, Brian Hortua, Andrés Mora, Thomas Rivera
  */
 public class GestionProducto {
+
+    //CONSTRUCTORES
+    public GestionProducto() {
+    }
     
 }
