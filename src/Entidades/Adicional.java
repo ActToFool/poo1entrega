@@ -10,9 +10,10 @@ package Entidades;
  * @author Emanuel Álvarez, Brian Hortua, Andrés Mora, Thomas Rivera
  */
 public class Adicional {
+
     private String nombre;
     private double precio;
-    
+
     //CONSTRUCTORES
     public Adicional() {
     }
@@ -21,6 +22,7 @@ public class Adicional {
         this.nombre = nombre;
         this.precio = precio;
     }
+
     //MODIFICADORES
     public double getPrecio() {
         return precio;

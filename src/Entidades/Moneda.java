@@ -10,8 +10,10 @@ package Entidades;
  * @author Emanuel Álvarez, Brian Hortua, Andrés Mora, Thomas Rivera
  */
 public class Moneda {
+
     private int denominacion;
     private int cantidad;
+
     //CONSTRUCTORES
     public Moneda() {
     }
@@ -37,5 +39,5 @@ public class Moneda {
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
-    
+
 }

@@ -13,6 +13,7 @@ import java.util.Date;
  * @author Emanuel Álvarez, Brian Hortua, Andrés Mora, Thomas Rivera
  */
 public class Venta {
+
     private Producto productoVendido;
     private Date fechaHora;
     private ArrayList<Moneda> pagoMonedas;
@@ -21,6 +22,7 @@ public class Venta {
     //CONSTRUCTORES
     public Venta() {
     }
+
     //MODIFICADORES
     public Producto getProductoVendido() {
         return productoVendido;
@@ -53,5 +55,5 @@ public class Venta {
     public void setAdicionalesSeleccionados(ArrayList<Adicional> adicionalesSeleccionados) {
         this.adicionalesSeleccionados = adicionalesSeleccionados;
     }
-    
+
 }

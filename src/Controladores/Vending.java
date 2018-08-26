@@ -21,10 +21,11 @@ public class Vending {
     private ArrayList<Venta> ventasRealizadas;
     private Venta ventaActual;
     private ArrayList<Moneda> dineroAcumulado;
-    
+
     //CONSTRUCTORES
     public Vending() {
     }
+
     //MODIFICADORES
     public GestionProducto getGestion() {
         return gestion;

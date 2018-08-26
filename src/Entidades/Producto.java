@@ -12,6 +12,7 @@ import java.util.ArrayList;
  * @author Emanuel Álvarez, Brian Hortua, Andrés Mora, Thomas Rivera
  */
 public class Producto {
+
     private String codigo;
     private int unidadesDisponibles;
     private double precio;
@@ -21,6 +22,7 @@ public class Producto {
     //CONSTRUCTORES
     public Producto() {
     }
+
     //MODIFICADORES
     public String getCodigo() {
         return codigo;
@@ -61,5 +63,5 @@ public class Producto {
     public void setAdicionalesProducto(ArrayList<Adicional> adicionalesProducto) {
         this.adicionalesProducto = adicionalesProducto;
     }
-    
+
 }
