@@ -23,6 +23,12 @@ public class Producto {
     public Producto() {
     }
 
+    public Producto(String codigo, int unidadesDisponibles, double precio) {
+        this.codigo = codigo;
+        this.unidadesDisponibles = unidadesDisponibles;
+        this.precio = precio;
+    }
+    
     //MODIFICADORES
     public String getCodigo() {
         return codigo;
