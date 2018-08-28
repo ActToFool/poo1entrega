@@ -25,7 +25,7 @@ public class GestionProducto {
         ArrayList<Producto> producto_aux=new ArrayList<>();
         ArrayList<Adicional> adicional_aux=new ArrayList<>();
         
-        
+        //pto el que lo lea
         //CREAMOS LOS OBSEQUIOS PARA PRODUCTO 2
         Producto o1=new Producto("301",24,0);
         Producto o2=new Producto("302",24,0);
