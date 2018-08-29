@@ -6,6 +6,7 @@
 package Controladores;
 
 import Entidades.Adicional;
+import Entidades.Moneda;
 import Entidades.Producto;
 import java.util.ArrayList;
 
@@ -173,6 +174,23 @@ public class GestionProducto {
         p5.setAdicionalesProducto(adicional_aux);
         //INSERTAMOS EL PRODUCTO EN LA LISTA QUE VAMOS A RETORNAR
         creada.add(p5);
+        
+        return creada;
+    }
+    public ArrayList<Moneda> dineroAcumulado(){
+        //CREAMOS LAS MONEDAS DE TODAS LAS DENOMINACIONES
+        Moneda m1=new Moneda(50,20);
+        Moneda m2=new Moneda(100,20);
+        Moneda m3=new Moneda(200,20);
+        Moneda m4=new Moneda(500,20);
+        Moneda m5=new Moneda(1000,20);
+        //CREAMOS LA LISTA QUE VAMOS A RETORNAR Y AGREGAMOS LAS MONEDAS
+        ArrayList<Moneda> creada=new ArrayList<>();
+        creada.add(m1);
+        creada.add(m2);
+        creada.add(m3);
+        creada.add(m4);
+        creada.add(m5);
         
         return creada;
     }
