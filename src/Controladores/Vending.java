@@ -10,6 +10,7 @@ import Entidades.Producto;
 import Entidades.Venta;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  *
@@ -59,6 +60,24 @@ public class Vending {
             }
         }
         return null;
+    }
+    
+    //4. Comprar producto
+    public int comprarProducto(String codigo){
+        String adicional;
+        Scanner teclado;
+        
+        this.verificarProductoAComprar(codigo);
+        return 0;
+    }
+    
+    private boolean verificarProductoAComprar(String codigo){
+        for (Producto producto : catalogo) {
+            if(producto.getCodigo().equals(codigo)){
+                return true;
+            }
+        }
+        return false;
     }
 
     //CONSTRUCTORES
