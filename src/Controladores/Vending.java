@@ -23,6 +23,7 @@ public class Vending {
     private Venta ventaActual;
     private ArrayList<Moneda> dineroAcumulado;
 
+    //¿no se ingresan monedas en esta funcion?
     public boolean crearNuevaVenta() {
         if (this.catalogo.isEmpty()) {
             return false;
@@ -35,23 +36,29 @@ public class Vending {
     }
 
     public int monedasExistentes(int denominacion) {
-        Moneda aux=new Moneda(1,denominacion);
         if ((denominacion == 50) || (denominacion == 100) || (denominacion == 200) || (denominacion == 500) || (denominacion == 1000)) {
-            this.ventaActual.getPagoMonedas().add(aux);
-            return this.buscarMonedasDenominacion(denominacion) + 1;
+            if (this.ventaActual.buscarMonedaDenominacion(denominacion) != null) {
+                this.ventaActual.buscarMonedaDenominacion(denominacion).setCantidad(buscarMonedaDenominacion(denominacion).getCantidad() + 1);
+            }
+            else{
+                Moneda m=new Moneda(denominacion,1);
+                this.ventaActual.getPagoMonedas().add(m);
+            }
+            this.buscarMonedaDenominacion(denominacion).setCantidad(buscarMonedaDenominacion(denominacion).getCantidad() + 1);
+            return this.buscarMonedaDenominacion(denominacion).getCantidad();
         } else {
             return -1;
         }
     }
 
     //busca en la lista por denominacion y retorna la cantidad actual
-    public int buscarMonedasDenominacion(int denominacion) {
+    public Moneda buscarMonedaDenominacion(int denominacion) {
         for (Moneda moneda : dineroAcumulado) {
             if (moneda.getDenominacion() == denominacion) {
-                return moneda.getCantidad();
+                return moneda;
             }
         }
-        return 0;
+        return null;
     }
 
     //CONSTRUCTORES
