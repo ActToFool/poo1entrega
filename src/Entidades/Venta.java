@@ -5,6 +5,7 @@
  */
 package Entidades;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -15,7 +16,7 @@ import java.util.Date;
 public class Venta {
 
     private Producto productoVendido;
-    private Date fechaHora;
+    private LocalDateTime fechaHora;
     private ArrayList<Moneda> pagoMonedas;
     private ArrayList<Adicional> adicionalesSeleccionados;
 
@@ -32,11 +33,11 @@ public class Venta {
         this.productoVendido = productoVendido;
     }
 
-    public Date getFechaHora() {
+    public LocalDateTime getFechaHora() {
         return fechaHora;
     }
 
-    public void setFechaHora(Date fechaHora) {
+    public void setFechaHora(LocalDateTime fechaHora) {
         this.fechaHora = fechaHora;
     }
 

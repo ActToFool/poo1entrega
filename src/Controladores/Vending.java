@@ -8,6 +8,7 @@ package Controladores;
 import Entidades.Moneda;
 import Entidades.Producto;
 import Entidades.Venta;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 /**
@@ -22,8 +23,19 @@ public class Vending {
     private Venta ventaActual;
     private ArrayList<Moneda> dineroAcumulado;
 
+    public boolean crearNuevaVenta(){
+        if(this.catalogo.isEmpty()){
+            return false;
+        }
+        else{
+            this.ventaActual=new Venta();
+            this.ventaActual.setFechaHora(LocalDateTime.now());
+            this.ventasRealizadas.add(ventaActual);
+            return true;
+        }
+    }
     //CONSTRUCTORES
-    public Vending() {
+    public Vending() {        
     }
 
     //MODIFICADORES
