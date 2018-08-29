@@ -13,7 +13,7 @@ public class Moneda {
 
     private int denominacion;
     private int cantidad;
-
+    
     //CONSTRUCTORES
     public Moneda() {
     }

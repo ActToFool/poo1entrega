@@ -23,19 +23,39 @@ public class Vending {
     private Venta ventaActual;
     private ArrayList<Moneda> dineroAcumulado;
 
-    public boolean crearNuevaVenta(){
-        if(this.catalogo.isEmpty()){
+    public boolean crearNuevaVenta() {
+        if (this.catalogo.isEmpty()) {
             return false;
-        }
-        else{
-            this.ventaActual=new Venta();
+        } else {
+            this.ventaActual = new Venta();
             this.ventaActual.setFechaHora(LocalDateTime.now());
             this.ventasRealizadas.add(ventaActual);
             return true;
         }
     }
+
+    public int monedasExistentes(int denominacion) {
+        Moneda aux=new Moneda(1,denominacion);
+        if ((denominacion == 50) || (denominacion == 100) || (denominacion == 200) || (denominacion == 500) || (denominacion == 1000)) {
+            this.ventaActual.getPagoMonedas().add(aux);
+            return this.buscarMonedasDenominacion(denominacion) + 1;
+        } else {
+            return -1;
+        }
+    }
+
+    //busca en la lista por denominacion y retorna la cantidad actual
+    public int buscarMonedasDenominacion(int denominacion) {
+        for (Moneda moneda : dineroAcumulado) {
+            if (moneda.getDenominacion() == denominacion) {
+                return moneda.getCantidad();
+            }
+        }
+        return 0;
+    }
+
     //CONSTRUCTORES
-    public Vending() {        
+    public Vending() {
     }
 
     //MODIFICADORES
