@@ -30,6 +30,7 @@ public class Venta {
     }
     //CONSTRUCTORES
     public Venta() {
+        this.adicionalesSeleccionados = new ArrayList<>();
     }
 
     //MODIFICADORES

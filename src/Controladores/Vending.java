@@ -68,12 +68,14 @@ public class Vending {
     public int comprarProducto(String codigo){
         String adicional;
         Scanner teclado;
-        System.out.println("Producto: "+this.verificarProductoAComprar(codigo).getCodigo());
-        if(this.verificarProductoAComprar(codigo)!=null){
+        //System.out.println("Producto: "+this.verificarProductoAComprar(codigo).getCodigo());
+        if((this.verificarProductoAComprar(codigo)!=null) && (!this.verificarProductoAComprar(codigo).adicionalesDisponibles().isEmpty())){        
             JOptionPane.showMessageDialog(null, "Desea agregar adiciones: "+this.verificarProductoAComprar(codigo).adicionalesDisponibles().toString());
             String adicionales = JOptionPane.showInputDialog("Ingrese los adicionales");
-        //JOptionPane.showInputDialog("Adicionales seleccionados: ",adicionales);
-        JOptionPane.showMessageDialog(null, "Los adicionales seleccionados son:" + adicionales);
+            JOptionPane.showMessageDialog(null, "Los adicionales seleccionados son:" + adicionales);
+            //if(){
+                
+            //}
         }
 
         
