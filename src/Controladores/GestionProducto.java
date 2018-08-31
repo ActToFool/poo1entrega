@@ -21,7 +21,7 @@ public class GestionProducto {
     }
     //CREA LOS PRODUCTOS
     public ArrayList<Producto> crearProductos(){
-        ArrayList<Producto> creada=new ArrayList<>();
+        ArrayList<Producto> creada = new ArrayList<Producto>();
         //EJEMPLO PARA CREAR PRODUCTOS, COMO PUEDEN VER SE CREAN 3 OBSEQUIOS Y 3 ADICIONES
         ArrayList<Producto> producto_aux=new ArrayList<>();
         ArrayList<Adicional> adicional_aux=new ArrayList<>();
@@ -34,9 +34,9 @@ public class GestionProducto {
         Producto o4=new Producto("304",12,0);
         Producto o5=new Producto("305",12,0);
         //CREAMOS LOS ADICIONALES PARA EL PRODUCTO 2
-        Adicional a1=new Adicional("Azucar",100);
-        Adicional a2=new Adicional("Chocolate",500);
-        Adicional a3=new Adicional("Leche",1000);
+        Adicional a1=new Adicional("Azucar",100,12);
+        Adicional a2=new Adicional("Chocolate",500,12);
+        Adicional a3=new Adicional("Leche",1000,12);
         //AÑADIMOS LOS OBSEQUIOS A UNA LISTA AUXILIAR PARA EL PRODUCTO 1
         producto_aux.add(o1);
         producto_aux.add(o2);
@@ -62,26 +62,26 @@ public class GestionProducto {
         Producto o24=new Producto("314",12,0);
         Producto o25=new Producto("315",12,0);
         //CREAMOS LOS ADICIONALES PARA EL PRODUCTO 2
-        Adicional a21=new Adicional("Jugo",1200);
-        Adicional a22=new Adicional("Galleta",800);
-        Adicional a23=new Adicional("Papas",1200);
+        Adicional a21=new Adicional("Jugo",1200,12);
+        Adicional a22=new Adicional("Galleta",800,12);
+        Adicional a23=new Adicional("Papas",1200,12);
         //AÑADIMOS LOS OBSEQUIOS A UNA LISTA AUXILIAR PARA EL PRODUCTO 2
-        producto_aux.clear();
-        producto_aux.add(o21);
-        producto_aux.add(o22);
-        producto_aux.add(o23);
-        producto_aux.add(o24);
-        producto_aux.add(o25);
+        ArrayList<Producto> producto_aux1=new ArrayList<>();
+        ArrayList<Adicional> adicional_aux1=new ArrayList<>();
+        producto_aux1.add(o21);
+        producto_aux1.add(o22);
+        producto_aux1.add(o23);
+        producto_aux1.add(o24);
+        producto_aux1.add(o25);
         //CREAMOS EL PRODUCTO E INSERTAMOS LA LISTA AUXILIAR PARA EL PRODUCTO 2
         Producto p2=new Producto("102",24,4000);
-        p2.setObsequios(producto_aux);
+        p2.setObsequios(producto_aux1);
         //AÑADIMOS LOS ADICIONALES A UNA LISTA AUXILIAR PARA EL PRODUCTO 2
-        adicional_aux.clear();
-        adicional_aux.add(a21);
-        adicional_aux.add(a22);
-        adicional_aux.add(a23);
+        adicional_aux1.add(a21);
+        adicional_aux1.add(a22);
+        adicional_aux1.add(a23);
         //INSERTAMOS LA LISTA AUXILIAR DE ADICIONALES A EL PRODUCTO
-        p2.setAdicionalesProducto(adicional_aux);
+        p2.setAdicionalesProducto(adicional_aux1);
         //INSERTAMOS EL PRODUCTO EN LA LISTA QUE VAMOS A RETORNAR
         creada.add(p2);
         
@@ -92,26 +92,26 @@ public class GestionProducto {
         Producto o34=new Producto("324",12,0);
         Producto o35=new Producto("325",12,0);
         //CREAMOS LOS ADICIONALES PARA EL PRODUCTO 3
-        Adicional a31=new Adicional("ManiSal",900);
-        Adicional a32=new Adicional("ManiMoto",1200);
-        Adicional a33=new Adicional("ManiDulce",1000);
+        Adicional a31=new Adicional("ManiSal",900,12);
+        Adicional a32=new Adicional("ManiMoto",1200,12);
+        Adicional a33=new Adicional("ManiDulce",1000,12);
         //AÑADIMOS LOS OBSEQUIOS A UNA LISTA AUXILIAR PARA EL PRODUCTO 3
-        producto_aux.clear();
-        producto_aux.add(o31);
-        producto_aux.add(o32);
-        producto_aux.add(o33);
-        producto_aux.add(o34);
-        producto_aux.add(o35);
+        ArrayList<Producto> producto_aux2=new ArrayList<>();
+        ArrayList<Adicional> adicional_aux2=new ArrayList<>();
+        producto_aux2.add(o31);
+        producto_aux2.add(o32);
+        producto_aux2.add(o33);
+        producto_aux2.add(o34);
+        producto_aux2.add(o35);
         //CREAMOS EL PRODUCTO E INSERTAMOS LA LISTA AUXILIAR PARA EL PRODUCTO 3
         Producto p3=new Producto("103",24,2500);
-        p3.setObsequios(producto_aux);
+        p3.setObsequios(producto_aux2);
         //AÑADIMOS LOS ADICIONALES A UNA LISTA AUXILIAR PARA EL PRODUCTO 3
-        adicional_aux.clear();
-        adicional_aux.add(a31);
-        adicional_aux.add(a32);
-        adicional_aux.add(a33);
+        adicional_aux2.add(a31);
+        adicional_aux2.add(a32);
+        adicional_aux2.add(a33);
         //INSERTAMOS LA LISTA AUXILIAR DE ADICIONALES A EL PRODUCTO
-        p3.setAdicionalesProducto(adicional_aux);
+        p3.setAdicionalesProducto(adicional_aux2);
         //INSERTAMOS EL PRODUCTO EN LA LISTA QUE VAMOS A RETORNAR
         creada.add(p3);
         
@@ -122,26 +122,26 @@ public class GestionProducto {
         Producto o44=new Producto("334",12,0);
         Producto o45=new Producto("335",12,0);
         //CREAMOS LOS ADICIONALES PARA EL PRODUCTO 4
-        Adicional a41=new Adicional("Cheetos",1000);
-        Adicional a42=new Adicional("Doritos",1400);
-        Adicional a43=new Adicional("Choclitos",900);
+        Adicional a41=new Adicional("Cheetos",1000,12);
+        Adicional a42=new Adicional("Doritos",1400,12);
+        Adicional a43=new Adicional("Choclitos",900,12);
         //AÑADIMOS LOS OBSEQUIOS A UNA LISTA AUXILIAR PARA EL PRODUCTO 4
-        producto_aux.clear();
-        producto_aux.add(o41);
-        producto_aux.add(o42);
-        producto_aux.add(o43);
-        producto_aux.add(o44);
-        producto_aux.add(o45);
+        ArrayList<Producto> producto_aux3=new ArrayList<>();
+        ArrayList<Adicional> adicional_aux3=new ArrayList<>();
+        producto_aux3.add(o41);
+        producto_aux3.add(o42);
+        producto_aux3.add(o43);
+        producto_aux3.add(o44);
+        producto_aux3.add(o45);
         //CREAMOS EL PRODUCTO E INSERTAMOS LA LISTA AUXILIAR PARA EL PRODUCTO 4
         Producto p4=new Producto("104",24,3500);
-        p4.setObsequios(producto_aux);
+        p4.setObsequios(producto_aux3);
         //AÑADIMOS LOS ADICIONALES A UNA LISTA AUXILIAR PARA EL PRODUCTO 4
-        adicional_aux.clear();
-        adicional_aux.add(a41);
-        adicional_aux.add(a42);
-        adicional_aux.add(a43);
+        adicional_aux3.add(a41);
+        adicional_aux3.add(a42);
+        adicional_aux3.add(a43);
         //INSERTAMOS LA LISTA AUXILIAR DE ADICIONALES A EL PRODUCTO
-        p4.setAdicionalesProducto(adicional_aux);
+        p4.setAdicionalesProducto(adicional_aux3);
         //INSERTAMOS EL PRODUCTO EN LA LISTA QUE VAMOS A RETORNAR
         creada.add(p4);
         
@@ -152,26 +152,26 @@ public class GestionProducto {
         Producto o54=new Producto("344",12,0);
         Producto o55=new Producto("345",12,0);
         //CREAMOS LOS ADICIONALES PARA EL PRODUCTO 2
-        Adicional a51=new Adicional("CocaCola",2600);
-        Adicional a52=new Adicional("Pepsi",2200);
-        Adicional a53=new Adicional("Quatro",1800);
+        Adicional a51=new Adicional("CocaCola",2600,12);
+        Adicional a52=new Adicional("Pepsi",2200,12);
+        Adicional a53=new Adicional("Quatro",1800,12);
         //AÑADIMOS LOS OBSEQUIOS A UNA LISTA AUXILIAR PARA EL PRODUCTO 5
-        producto_aux.clear();
-        producto_aux.add(o51);
-        producto_aux.add(o52);
-        producto_aux.add(o53);
-        producto_aux.add(o54);
-        producto_aux.add(o55);
+        ArrayList<Producto> producto_aux4=new ArrayList<>();
+        ArrayList<Adicional> adicional_aux4=new ArrayList<>();
+        producto_aux4.add(o51);
+        producto_aux4.add(o52);
+        producto_aux4.add(o53);
+        producto_aux4.add(o54);
+        producto_aux4.add(o55);
         //CREAMOS EL PRODUCTO E INSERTAMOS LA LISTA AUXILIAR PARA EL PRODUCTO 5
         Producto p5=new Producto("105",24,1500);
-        p5.setObsequios(producto_aux);
+        p5.setObsequios(producto_aux4);
         //AÑADIMOS LOS ADICIONALES A UNA LISTA AUXILIAR PARA EL PRODUCTO 5
-        adicional_aux.clear();
-        adicional_aux.add(a51);
-        adicional_aux.add(a52);
-        adicional_aux.add(a53);
+        adicional_aux4.add(a51);
+        adicional_aux4.add(a52);
+        adicional_aux4.add(a53);
         //INSERTAMOS LA LISTA AUXILIAR DE ADICIONALES A EL PRODUCTO
-        p5.setAdicionalesProducto(adicional_aux);
+        p5.setAdicionalesProducto(adicional_aux4);
         //INSERTAMOS EL PRODUCTO EN LA LISTA QUE VAMOS A RETORNAR
         creada.add(p5);
         

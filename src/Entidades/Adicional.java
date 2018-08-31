@@ -13,16 +13,23 @@ public class Adicional {
 
     private String nombre;
     private double precio;
+    private int existencias;
 
     //CONSTRUCTORES
     public Adicional() {
     }
 
+    public Adicional(String nombre, double precio, int existencias) {
+        this.nombre = nombre;
+        this.precio = precio;
+        this.existencias = existencias;
+    }
+    
     public Adicional(String nombre, double precio) {
         this.nombre = nombre;
         this.precio = precio;
     }
-
+    
     //MODIFICADORES
     public double getPrecio() {
         return precio;
@@ -38,5 +45,13 @@ public class Adicional {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public int getExistencias() {
+        return existencias;
+    }
+
+    public void setExistencias(int existencias) {
+        this.existencias = existencias;
     }
 }

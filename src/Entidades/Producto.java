@@ -28,7 +28,15 @@ public class Producto {
         this.unidadesDisponibles = unidadesDisponibles;
         this.precio = precio;
     }
-    
+    public ArrayList<String> adicionalesDisponibles(){
+        ArrayList<String> listaAdicionales=new ArrayList<>();
+        for (Adicional adicionPro : this.adicionalesProducto) {
+            if(adicionPro.getExistencias()>0){
+                listaAdicionales.add(adicionPro.getNombre());
+            }
+        }
+        return listaAdicionales;
+    }
     //MODIFICADORES
     public String getCodigo() {
         return codigo;

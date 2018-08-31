@@ -17,11 +17,13 @@ public class PantallaVending {
 
     public static void main(String[] args) {
         //AQUI IBA EL MAIN MARICONES
-
+      PantallaVending pantalla= new PantallaVending();
+      pantalla.vending.comprarProducto("101");
     }
 
     //CONSTRUCTORES
     public PantallaVending() {
+        this.vending=new Vending();
     }
 
     //MODIFICADORES

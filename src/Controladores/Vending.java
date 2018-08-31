@@ -5,12 +5,15 @@
  */
 package Controladores;
 
+import Entidades.Adicional;
 import Entidades.Moneda;
 import Entidades.Producto;
 import Entidades.Venta;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
+ 
 
 /**
  *
@@ -23,7 +26,6 @@ public class Vending {
     private ArrayList<Venta> ventasRealizadas;
     private Venta ventaActual;
     private ArrayList<Moneda> dineroAcumulado;
-
     //¿no se ingresan monedas en esta funcion?
     public boolean crearNuevaVenta() {
         if (this.catalogo.isEmpty()) {
@@ -66,22 +68,32 @@ public class Vending {
     public int comprarProducto(String codigo){
         String adicional;
         Scanner teclado;
+        System.out.println("Producto: "+this.verificarProductoAComprar(codigo).getCodigo());
+        if(this.verificarProductoAComprar(codigo)!=null){
+            JOptionPane.showMessageDialog(null, "Desea agregar adiciones: "+this.verificarProductoAComprar(codigo).adicionalesDisponibles().toString());
+            String adicionales = JOptionPane.showInputDialog("Ingrese los adicionales");
+        //JOptionPane.showInputDialog("Adicionales seleccionados: ",adicionales);
+        JOptionPane.showMessageDialog(null, "Los adicionales seleccionados son:" + adicionales);
+        }
+
         
-        this.verificarProductoAComprar(codigo);
         return 0;
     }
     
-    private boolean verificarProductoAComprar(String codigo){
+    private Producto verificarProductoAComprar(String codigo){
         for (Producto producto : catalogo) {
             if(producto.getCodigo().equals(codigo)){
-                return true;
+                return producto;
             }
         }
-        return false;
+        return null;
     }
 
     //CONSTRUCTORES
     public Vending() {
+        this.catalogo = new ArrayList<>();
+        this.gestion=new GestionProducto();
+        this.catalogo = this.gestion.crearProductos();
     }
 
     //MODIFICADORES
