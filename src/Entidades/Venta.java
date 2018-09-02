@@ -20,7 +20,7 @@ public class Venta {
     private ArrayList<Moneda> pagoMonedas;
     private ArrayList<Adicional> adicionalesSeleccionados;
 
-    public Moneda buscarMonedaDenominacion(int denominacion) {
+    public Moneda buscarMonedaDenominacionVenta(int denominacion) {
         for (Moneda moneda : pagoMonedas) {
             if (moneda.getDenominacion() == denominacion) {
                 return moneda;

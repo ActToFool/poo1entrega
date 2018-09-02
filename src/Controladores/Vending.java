@@ -9,6 +9,7 @@ import Entidades.Adicional;
 import Entidades.Moneda;
 import Entidades.Producto;
 import Entidades.Venta;
+import Interfaces.PantallaVending;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -37,11 +38,22 @@ public class Vending {
             return true;
         }
     }
+    //Funcion punto 4
+    public boolean comprarProducto(String codigo, String Adicional){
+        Producto p_actual=verificarProductoAComprar(codigo);
+        if((p_actual!=null)&&(p_actual.adicionalesDisponibles().isEmpty()!=true)){
+            
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "El producto seleccionado no se encuentra disponible");
+        }
+        return false;
+    }
 
     public int monedasExistentes(int denominacion) {
         if ((denominacion == 50) || (denominacion == 100) || (denominacion == 200) || (denominacion == 500) || (denominacion == 1000)) {
-            if (this.ventaActual.buscarMonedaDenominacion(denominacion) != null) {
-                this.ventaActual.buscarMonedaDenominacion(denominacion).setCantidad(buscarMonedaDenominacion(denominacion).getCantidad() + 1);
+            if (this.ventaActual.buscarMonedaDenominacionVenta(denominacion) != null) {
+                this.ventaActual.buscarMonedaDenominacionVenta(denominacion).setCantidad(buscarMonedaDenominacion(denominacion).getCantidad() + 1);
             }
             else{
                 Moneda m=new Moneda(denominacion,1);
@@ -63,25 +75,16 @@ public class Vending {
         }
         return null;
     }
-    
-    //4. Comprar producto
-    public int comprarProducto(String codigo){
-        String adicional;
-        Scanner teclado;
-        //System.out.println("Producto: "+this.verificarProductoAComprar(codigo).getCodigo());
-        if((this.verificarProductoAComprar(codigo)!=null) && (!this.verificarProductoAComprar(codigo).adicionalesDisponibles().isEmpty())){        
-            JOptionPane.showMessageDialog(null, "Desea agregar adiciones: "+this.verificarProductoAComprar(codigo).adicionalesDisponibles().toString());
-            String adicionales = JOptionPane.showInputDialog("Ingrese los adicionales");
-            JOptionPane.showMessageDialog(null, "Los adicionales seleccionados son:" + adicionales);
-            //if(){
-                
-            //}
+    public ArrayList<String> adicionalesProducto(String codigo){
+        if((this.verificarProductoAComprar(codigo)==null)||(this.verificarProductoAComprar(codigo).adicionalesDisponibles().isEmpty())){
+            return null;
         }
-
-        
-        return 0;
+        else{
+            return this.verificarProductoAComprar(codigo).adicionalesDisponibles();
+        }
     }
-    
+    //esta funcion toca revisarla :'v
+    //en esta funcion decia que era booleana pero nos parefcio mas facil retornar el producto para no reescribir codigo
     private Producto verificarProductoAComprar(String codigo){
         for (Producto producto : catalogo) {
             if(producto.getCodigo().equals(codigo)){
@@ -90,7 +93,6 @@ public class Vending {
         }
         return null;
     }
-
     //CONSTRUCTORES
     public Vending() {
         this.catalogo = new ArrayList<>();
