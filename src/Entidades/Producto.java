@@ -28,15 +28,53 @@ public class Producto {
         this.unidadesDisponibles = unidadesDisponibles;
         this.precio = precio;
     }
-    public ArrayList<String> adicionalesDisponibles(){
-        ArrayList<String> listaAdicionales=new ArrayList<>();
+
+    public boolean validarObsequios() {
+        if (this.unidadesDisponibles < 0) {
+            return false;
+        } else {
+            for (Producto obsequio : obsequios) {
+                if (obsequio.unidadesDisponibles < 0) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public ArrayList<String> adicionalesDisponibles() {
+        ArrayList<String> listaAdicionales = new ArrayList<>();
         for (Adicional adicionPro : this.adicionalesProducto) {
-            if(adicionPro.getExistencias()>0){
+            if (adicionPro.getExistencias() > 0) {
                 listaAdicionales.add(adicionPro.getNombre());
             }
         }
         return listaAdicionales;
     }
+
+    //este mejor lo hacemos de tipo lista de adicionales para no repetir codigo
+    public ArrayList<Adicional> disponibilidadAdicionales(ArrayList<String> adiciones) {
+        ArrayList<Adicional> lista = new ArrayList<Adicional>();
+        ArrayList<String> aux = this.adicionalesDisponibles();
+        for (String llega : adiciones) {
+            for (String hay : aux) {
+                if (llega.compareTo(hay) == 0) {
+                    lista.add(this.buscarAdicionalNombre(hay));
+                }
+            }
+        }
+        return lista;
+    }
+
+    public Adicional buscarAdicionalNombre(String buscar) {
+        for (Adicional adiciona : this.adicionalesProducto) {
+            if (adiciona.getNombre().equals(buscar)) {
+                return adiciona;
+            }
+        }
+        return null;
+    }
+
     //MODIFICADORES
     public String getCodigo() {
         return codigo;

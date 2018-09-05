@@ -6,6 +6,7 @@
 package Interfaces;
 
 import Controladores.Vending;
+import java.util.ArrayList;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
 
@@ -21,28 +22,33 @@ public class PantallaVending {
         //AQUI IBA EL MAIN
       PantallaVending pantalla= new PantallaVending();
       String codigo=pantalla.recibirCodigo();
-      String adicionales;
-      if(pantalla.vending.adicionalesProducto(codigo)!=null){
-         pantalla.imprimirAdicionalesProducto(codigo);
-         pantalla.recibirAdicionales();
-         
+      ArrayList<String> adicionales=new ArrayList<>();
+      String aux;
+      do{
+          aux=pantalla.recibirAdicionales();
+          adicionales.add(aux);
+      }while((aux.compareTo("no")!=0));
+      adicionales.remove(aux);
+      if(pantalla.vending.comprarProducto(codigo,adicionales)){
+          JOptionPane.showMessageDialog(null, "Disfrute su producto :) ");
       }
       else{
-          pantalla.mensajeErrorProducto();
+          JOptionPane.showMessageDialog(null, "No se pudo realizar la venta");
       }
     }
+
     public void mensajeErrorProducto(){
         JOptionPane.showMessageDialog(null,"El producto no se encuentra disponible ");
     }
-    public void imprimirAdicionalesProducto(String codigo){
+    /*public void imprimirAdicionalesProducto(String codigo){
         JOptionPane.showMessageDialog(null, "Los productos disponibles son: \n "+this.vending.adicionalesProducto(codigo).toString());
-    }
+    }*/
     public String recibirCodigo(){
         String codigo = JOptionPane.showInputDialog("Ingrese el codigo del producto: ");
         return codigo;
     }
     public String recibirAdicionales(){
-        String adicionales = JOptionPane.showInputDialog("Ingrese los adicionales");
+        String adicionales = JOptionPane.showInputDialog("Ingrese los adicionales(''no'' si no desea más)");
         return adicionales;
     }
 

@@ -5,15 +5,11 @@
  */
 package Controladores;
 
-import Entidades.Adicional;
 import Entidades.Moneda;
 import Entidades.Producto;
 import Entidades.Venta;
-import Interfaces.PantallaVending;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Scanner;
-import javax.swing.JOptionPane;
  
 
 /**
@@ -39,16 +35,25 @@ public class Vending {
         }
     }
     //Funcion punto 4
-    public boolean comprarProducto(String codigo, String Adicional){
-        Producto p_actual=verificarProductoAComprar(codigo);
-        if((p_actual!=null)&&(p_actual.adicionalesDisponibles().isEmpty()!=true)){
-            
-        }
-        else{
-            JOptionPane.showMessageDialog(null, "El producto seleccionado no se encuentra disponible");
+    public boolean comprarProducto(String codigo, ArrayList<String> adicionales){
+        Producto productoVendido=verificarProductoAComprar(codigo);
+        if((productoVendido!=null)&&(productoVendido.disponibilidadAdicionales(adicionales).isEmpty()==false)){
+            if(productoVendido.validarObsequios()){
+                productoVendido.setAdicionalesProducto(productoVendido.disponibilidadAdicionales(adicionales));
+                return true;
+            }
         }
         return false;
     }
+    /*private double calcularTotalAdicionales(String codigo, ArrayList<String> adicionales){
+        return this.verificarProductoAComprar(codigo);
+    }*/
+    private double calcularValorProducto(String codigo){
+        return this.verificarProductoAComprar(codigo).getPrecio();
+    }
+    /*private double calcularTotalVenta(String codigo, ArrayList<String> adicionales){
+        return this.calcularTotalAdicionales(codigo, adicionales)+this.calcularValorProducto(codigo, adicionales);
+    }*/
 
     public int monedasExistentes(int denominacion) {
         if ((denominacion == 50) || (denominacion == 100) || (denominacion == 200) || (denominacion == 500) || (denominacion == 1000)) {
@@ -75,16 +80,19 @@ public class Vending {
         }
         return null;
     }
-    public ArrayList<String> adicionalesProducto(String codigo){
+    
+    //Funcion que muestra los adicionales del producto
+    
+    /*public ArrayList<String> adicionalesProducto(String codigo){
         if((this.verificarProductoAComprar(codigo)==null)||(this.verificarProductoAComprar(codigo).adicionalesDisponibles().isEmpty())){
             return null;
         }
         else{
             return this.verificarProductoAComprar(codigo).adicionalesDisponibles();
         }
-    }
+    }*/
     //esta funcion toca revisarla :'v
-    //en esta funcion decia que era booleana pero nos parefcio mas facil retornar el producto para no reescribir codigo
+    //en esta funcion decia que era booleana pero nos parecio mas facil retornar el producto para no reescribir codigo
     private Producto verificarProductoAComprar(String codigo){
         for (Producto producto : catalogo) {
             if(producto.getCodigo().equals(codigo)){
@@ -98,6 +106,7 @@ public class Vending {
         this.catalogo = new ArrayList<>();
         this.gestion=new GestionProducto();
         this.catalogo = this.gestion.crearProductos();
+        this.crearNuevaVenta();
     }
 
     //MODIFICADORES
