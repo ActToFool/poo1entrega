@@ -7,7 +7,6 @@ package Interfaces;
 
 import Controladores.Vending;
 import java.util.ArrayList;
-import java.util.Scanner;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,41 +19,69 @@ public class PantallaVending {
 
     public static void main(String[] args) {
         //AQUI IBA EL MAIN
-      PantallaVending pantalla= new PantallaVending();
-      String codigo=pantalla.recibirCodigo();
-      ArrayList<String> adicionales=new ArrayList<>();
-      String aux;
-      do{
-          aux=pantalla.recibirAdicionales();
-          adicionales.add(aux);
-      }while((aux.compareTo("no")!=0));
-      adicionales.remove(aux);
-      if(pantalla.vending.comprarProducto(codigo,adicionales)){
-          JOptionPane.showMessageDialog(null, "Disfrute su producto :) ");
-      }
-      else{
-          JOptionPane.showMessageDialog(null, "No se pudo realizar la venta");
-      }
+        PantallaVending pantalla = new PantallaVending();
+        //recibe el codigo del producto a comprar
+        String codigo = pantalla.recibirCodigo();
+        
+        //Inserta las monedas
+        //pantalla.recibirMonedas();
+
+        //pide los adicionales y lo ingresa a la lista
+        pantalla.recibirAdicionales(codigo);
+
+        
+
     }
 
-    public void mensajeErrorProducto(){
-        JOptionPane.showMessageDialog(null,"El producto no se encuentra disponible ");
+    public void mensajeErrorProducto() {
+        JOptionPane.showMessageDialog(null, "El producto no se encuentra disponible ");
     }
+
     /*public void imprimirAdicionalesProducto(String codigo){
         JOptionPane.showMessageDialog(null, "Los productos disponibles son: \n "+this.vending.adicionalesProducto(codigo).toString());
     }*/
-    public String recibirCodigo(){
+    public String recibirCodigo() {
         String codigo = JOptionPane.showInputDialog("Ingrese el codigo del producto: ");
         return codigo;
     }
-    public String recibirAdicionales(){
-        String adicionales = JOptionPane.showInputDialog("Ingrese los adicionales(''no'' si no desea más)");
-        return adicionales;
+
+    public void recibirMonedas() {
+        ArrayList<Integer> monedasIngresadas = new ArrayList<>();
+        int monedita = 0;
+        do {
+            monedita = Integer.parseInt(JOptionPane.showInputDialog("Ingrese una moneda(''0'' si no desea más)"));
+            monedasIngresadas.add(monedita);
+
+        } while (monedita != 0);
+        monedasIngresadas.remove(monedita);
+
+    }
+
+    //pide los adicionales
+    public void recibirAdicionales(String codigo) {
+        //crea la lista de adicionales a comprar
+        ArrayList<String> adicionales = new ArrayList<>();
+        String aux;
+
+        do {
+            aux = JOptionPane.showInputDialog("Ingrese un adicional(''no'' si no desea más)");
+            adicionales.add(aux);
+        } while ((aux.compareTo("no") != 0));
+        adicionales.remove(aux); //se elimina el último agregado que es el "no"
+        
+        //empieza la venta del producto
+        if (this.vending.comprarProducto(codigo, adicionales)) {
+            //
+            JOptionPane.showMessageDialog(null, "Disfrute su producto :) ");
+        } else {
+            JOptionPane.showMessageDialog(null, "No se pudo realizar la venta");
+        }
+
     }
 
     //CONSTRUCTORES
     public PantallaVending() {
-        this.vending=new Vending();
+        this.vending = new Vending();
     }
 
     //MODIFICADORES

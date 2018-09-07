@@ -5,6 +5,7 @@
  */
 package Controladores;
 
+import Entidades.Adicional;
 import Entidades.Moneda;
 import Entidades.Producto;
 import Entidades.Venta;
@@ -22,29 +23,40 @@ public class Vending {
     private ArrayList<Producto> catalogo;
     private ArrayList<Venta> ventasRealizadas;
     private Venta ventaActual;
-    private ArrayList<Moneda> dineroAcumulado;
+    private ArrayList<Moneda> dineroAcumulado;   
+    
     //¿no se ingresan monedas en esta funcion?
-    public boolean crearNuevaVenta() {
+    public boolean crearNuevaVenta(){
         if (this.catalogo.isEmpty()) {
             return false;
         } else {
             this.ventaActual = new Venta();
             this.ventaActual.setFechaHora(LocalDateTime.now());
-            this.ventasRealizadas.add(ventaActual);
+            this.ventasRealizadas.add(this.ventaActual);
             return true;
         }
     }
     //Funcion punto 4
     public boolean comprarProducto(String codigo, ArrayList<String> adicionales){
         Producto productoVendido=verificarProductoAComprar(codigo);
-        if((productoVendido!=null)&&(productoVendido.disponibilidadAdicionales(adicionales).isEmpty()==false)){
-            if(productoVendido.validarObsequios()){
-                productoVendido.setAdicionalesProducto(productoVendido.disponibilidadAdicionales(adicionales));
+        ArrayList<Adicional> adi = productoVendido.disponibilidadAdicionales(adicionales);
+        if((productoVendido!=null)&&(adi.isEmpty()==false)){
+            
+            if(this.verificarUnidades(productoVendido) && (productoVendido.validarObsequios() != null)){
+                productoVendido.setAdicionalesProducto(adi);
+                //relacionar venta acual con producto Vendido
+                //realizar conexion con adicionales seleccionados
                 return true;
             }
         }
         return false;
     }
+    
+    //Funcion privada que verifica si hay unidades disponibles del producto
+    private boolean verificarUnidades(Producto productoActual){
+        return productoActual.getUnidadesDisponibles() > 0;
+    }
+    
     /*private double calcularTotalAdicionales(String codigo, ArrayList<String> adicionales){
         return this.verificarProductoAComprar(codigo);
     }*/
@@ -106,7 +118,7 @@ public class Vending {
         this.catalogo = new ArrayList<>();
         this.gestion=new GestionProducto();
         this.catalogo = this.gestion.crearProductos();
-        this.crearNuevaVenta();
+        this.ventaActual=new Venta();
     }
 
     //MODIFICADORES

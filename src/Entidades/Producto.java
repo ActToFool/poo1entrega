@@ -29,17 +29,15 @@ public class Producto {
         this.precio = precio;
     }
 
-    public boolean validarObsequios() {
-        if (this.unidadesDisponibles < 0) {
-            return false;
-        } else {
-            for (Producto obsequio : obsequios) {
-                if (obsequio.unidadesDisponibles < 0) {
-                    return false;
-                }
+    //Verifica si un obsequio tiene disponibilidades
+    //si las tienes, retorna ese mismo obsequio
+    public Producto validarObsequios() {
+        for (Producto obsequio : this.obsequios) {
+            if (obsequio.unidadesDisponibles > 0) {
+                return obsequio;
             }
         }
-        return true;
+        return null;
     }
 
     public ArrayList<String> adicionalesDisponibles() {
@@ -62,6 +60,9 @@ public class Producto {
                     lista.add(this.buscarAdicionalNombre(hay));
                 }
             }
+        }
+        if(adiciones.size()!=lista.size()){
+            lista.clear();
         }
         return lista;
     }
