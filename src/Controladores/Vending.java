@@ -41,12 +41,15 @@ public class Vending {
         Producto productoVendido=verificarProductoAComprar(codigo);
         ArrayList<Adicional> adi = productoVendido.disponibilidadAdicionales(adicionales);
         if((productoVendido!=null)&&(adi.isEmpty()==false)){
-            
             if(this.verificarUnidades(productoVendido) && (productoVendido.validarObsequios() != null)){
                 productoVendido.setAdicionalesProducto(adi);
                 //relacionar venta acual con producto Vendido
+                this.ventaActual.setProductoVendido(productoVendido);
                 //realizar conexion con adicionales seleccionados
-                return true;
+                this.ventaActual.setAdicionalesSeleccionados(adi);
+                if(this.crearNuevaVenta()){
+                    return true;
+                }
             }
         }
         return false;
@@ -119,6 +122,7 @@ public class Vending {
         this.gestion=new GestionProducto();
         this.catalogo = this.gestion.crearProductos();
         this.ventaActual=new Venta();
+        this.ventasRealizadas=new ArrayList<>();
     }
 
     //MODIFICADORES

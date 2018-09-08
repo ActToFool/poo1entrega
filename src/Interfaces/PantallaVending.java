@@ -22,13 +22,11 @@ public class PantallaVending {
         PantallaVending pantalla = new PantallaVending();
         //recibe el codigo del producto a comprar
         String codigo = pantalla.recibirCodigo();
-        
         //Inserta las monedas
         //pantalla.recibirMonedas();
 
         //pide los adicionales y lo ingresa a la lista
         pantalla.recibirAdicionales(codigo);
-
         
 
     }
