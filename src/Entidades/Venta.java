@@ -7,7 +7,6 @@ package Entidades;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  *
@@ -28,6 +27,8 @@ public class Venta {
         }
         return null;
     }
+    //recorre la lista de adicionales y retorna el valor total
+    
     //CONSTRUCTORES
     public Venta() {
         this.adicionalesSeleccionados = new ArrayList<>();

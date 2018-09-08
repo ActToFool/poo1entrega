@@ -54,21 +54,63 @@ public class Vending {
         }
         return false;
     }
-    
+    //funcion que valida las moendas ingresadas con el total de la venta actual
+    private boolean validarMonedas(){
+        if(this.totalMonedasIngresadas()<=this.valorTotalProducto()){
+            return true;
+        }
+        return false;
+    }
+    //funcion que le suma las monedas que ingreso el usuario a la lista de monedas de la maquina
+    private void actualizarMonedas(){
+        Moneda aux;
+        for (Moneda pagoMoneda : this.ventaActual.getPagoMonedas()) {
+            aux=this.buscarMonedaDenominacion(pagoMoneda.getDenominacion());
+            aux.setCantidad(aux.getCantidad()+pagoMoneda.getCantidad());
+        }
+    }
+    //funcion que llama a la funcion que le resta la cantidad a los productos y a los obsequios de los mismos
+    private void actualizarProductos(){
+        Producto p=this.ventaActual.getProductoVendido();
+        this.restarCantidadAlProducto(p);
+        this.restarCantidadAlProducto(p.validarObsequios());
+        //nos dimos cuenta que los adicionales no se restaban entonces tambien decidimos restarlos
+        for (Adicional not : this.ventaActual.getAdicionalesSeleccionados()) {
+            not.setExistencias(not.getExistencias()-1);
+        }
+    }
+    //esta funcion la hicimos para no reescribir codigo
+    private void restarCantidadAlProducto(Producto p){
+        int cantidadProducto= p.getUnidadesDisponibles();
+        p.setUnidadesDisponibles(cantidadProducto-1);
+    }
+    //total de monedas de la venta actual
+    private double totalMonedasIngresadas(){
+        double acum=0;
+        for(Moneda not : this.ventaActual.getPagoMonedas()){
+            acum=acum+(not.getCantidad()*not.getDenominacion());
+        }
+        return acum;
+    }
+    private double totalAdicionales(){
+        double acum=0;
+        for (Adicional adi : this.ventaActual.getAdicionalesSeleccionados()) {
+            acum+=adi.getPrecio();
+        }
+        return acum;
+    }
+    //retorna el valor del producto de la venta actual
+    private double valorProducto(){
+        return this.ventaActual.getProductoVendido().getPrecio();
+    }
+    //retorna el valor del producto mas el valor de los adicionales
+    private double valorTotalProducto(){
+        return this.valorProducto()+this.totalAdicionales();
+    }
     //Funcion privada que verifica si hay unidades disponibles del producto
     private boolean verificarUnidades(Producto productoActual){
         return productoActual.getUnidadesDisponibles() > 0;
     }
-    
-    /*private double calcularTotalAdicionales(String codigo, ArrayList<String> adicionales){
-        return this.verificarProductoAComprar(codigo);
-    }*/
-    private double calcularValorProducto(String codigo){
-        return this.verificarProductoAComprar(codigo).getPrecio();
-    }
-    /*private double calcularTotalVenta(String codigo, ArrayList<String> adicionales){
-        return this.calcularTotalAdicionales(codigo, adicionales)+this.calcularValorProducto(codigo, adicionales);
-    }*/
 
     public int monedasExistentes(int denominacion) {
         if ((denominacion == 50) || (denominacion == 100) || (denominacion == 200) || (denominacion == 500) || (denominacion == 1000)) {
