@@ -22,8 +22,6 @@ public class PantallaVending {
         PantallaVending pantalla = new PantallaVending();
         //recibe el codigo del producto a comprar
         String codigo = pantalla.recibirCodigo();
-        //Inserta las monedas
-        //pantalla.recibirMonedas();
 
         //pide los adicionales y lo ingresa a la lista
         pantalla.recibirAdicionales(codigo);
@@ -69,12 +67,13 @@ public class PantallaVending {
         
         //empieza la venta del producto
         if (this.vending.comprarProducto(codigo, adicionales)) {
-            //
+            //llama a la que recibe monedas
+            //Inserta las monedas
+            this.recibirMonedas();
             JOptionPane.showMessageDialog(null, "Disfrute su producto :) ");
         } else {
             JOptionPane.showMessageDialog(null, "No se pudo realizar la venta");
         }
-
     }
 
     //CONSTRUCTORES
