@@ -192,7 +192,7 @@ public class Vending {
     public String formatearVueltas(){
         String aux = "";
         for (Moneda moneda : this.devolverRestante()) {
-            aux=aux.concat("\n101Moneda: "+moneda.getDenominacion()+" Cantidad: "+moneda.getCantidad()+"\n");
+            aux=aux.concat("\nMoneda: "+moneda.getDenominacion()+" Cantidad: "+moneda.getCantidad()+"\n");
         }
         return aux;
     }
