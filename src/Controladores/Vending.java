@@ -166,11 +166,11 @@ public class Vending {
     }
 
     //devuelte saldo sobrante
-    public void devolverRestante(){
-        ArrayList<Moneda> monedaADevolver = null;
+    public ArrayList<Moneda> devolverRestante(){
+        ArrayList<Moneda> monedaADevolver = new ArrayList<>();
         int vueltos = (int) this.validarMonedas();
         if(vueltos > 0){
-            int iter = 0;
+            int iter = (this.dineroAcumulado.size()-1);
             while(vueltos > 0){
                 Moneda actual = this.dineroAcumulado.get(iter);
                 Moneda mon = new Moneda();
@@ -178,8 +178,11 @@ public class Vending {
                 mon.setCantidad(vueltos/actual.getDenominacion());
                 monedaADevolver.add(mon);
                 vueltos %= actual.getDenominacion();
+                iter--;
                 
             }
+            
+            return monedaADevolver;
             
             /*Moneda mon1 = new Moneda();
             mon1.setDenominacion(1000);
@@ -205,6 +208,7 @@ public class Vending {
             vueltos = vueltos % 100;
             monedaADevolver.add(mon4);*/
         }
+        return null;
     }
 
     //eliminar monedas de 

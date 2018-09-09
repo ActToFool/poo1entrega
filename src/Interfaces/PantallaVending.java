@@ -6,6 +6,7 @@
 package Interfaces;
 
 import Controladores.Vending;
+import Entidades.Moneda;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -62,7 +63,13 @@ public class PantallaVending {
         }
         else{
             if(bandera>0.0){
-                JOptionPane.showMessageDialog(null, "toca dar vueltas");
+                ArrayList<Moneda> vueltos = this.vending.devolverRestante();
+                int cont = 0;
+                while(cont < vueltos.size()){
+                    JOptionPane.showMessageDialog(null, "toca dar vueltas monedas de:" + vueltos.get(cont).getDenominacion() + ("Cantidad: ") + vueltos.get(cont).getCantidad());
+                    cont++;
+                }
+                
             }else{
                 if(bandera==-1){
                     JOptionPane.showMessageDialog(null, "Pago fallido");
