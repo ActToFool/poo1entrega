@@ -32,6 +32,7 @@ public class Venta {
     //CONSTRUCTORES
     public Venta() {
         this.adicionalesSeleccionados = new ArrayList<>();
+        this.pagoMonedas=new ArrayList<>();
     }
 
     //MODIFICADORES

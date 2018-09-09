@@ -5,12 +5,8 @@
  */
 package Controladores;
 
-import Entidades.Producto;
 import Entidades.Venta;
-import Controladores.Vending;
-import Entidades.Moneda;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 /**

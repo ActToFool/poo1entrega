@@ -50,6 +50,12 @@ public class PantallaVending {
 
         } while (monedita != 0);
         monedasIngresadas.remove(monedita);
+        if(this.vending.pagoProductoVentaActual(monedasIngresadas)){
+            JOptionPane.showMessageDialog(null, "Disfrute su producto :) ");
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Pago fallido");
+        }
 
     }
 
@@ -70,7 +76,6 @@ public class PantallaVending {
             //llama a la que recibe monedas
             //Inserta las monedas
             this.recibirMonedas();
-            JOptionPane.showMessageDialog(null, "Disfrute su producto :) ");
         } else {
             JOptionPane.showMessageDialog(null, "No se pudo realizar la venta");
         }
