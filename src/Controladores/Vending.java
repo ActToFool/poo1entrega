@@ -81,7 +81,7 @@ public class Vending {
     //funcion que valida las moendas ingresadas con el total de la venta actual(era bool pero lo
     //vamos a volver double para que retorne lo que sobra o lo que falta
     private double validarMonedas() {
-        return this.totalMonedasIngresadas()-this.valorTotalProducto();
+            return this.totalMonedasIngresadas()-this.valorTotalProducto();
     }
 
     //funcion que le suma las monedas que ingreso el usuario a la lista de monedas de la maquina
@@ -161,7 +161,16 @@ public class Vending {
             return -1;
         }
     }
-
+    
+    //devuelte saldo sobrante
+    public void devolverRestante(){
+        if(this.validarMonedas() > 0){
+            
+        }
+    }
+    
+    //eliminar monedas de 
+    
     //busca en la lista por denominacion y retorna la cantidad actual
     public Moneda buscarMonedaDenominacion(int denominacion) {
         for (Moneda moneda : dineroAcumulado) {
