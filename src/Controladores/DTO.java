@@ -23,21 +23,21 @@ public class DTO {
         for (Venta not : VentasRealizadas) {
             LocalDate DateTimeConvertido = not.getFechaHora().toLocalDate();
             if (LocalDate.now().equals(DateTimeConvertido)) {
-                TotalVentasDia += not.getProductoVendido().getPrecio();
+                this.TotalVentasDia += not.getProductoVendido().getPrecio();
             }
         }
-        return TotalVentasDia;
+        return this.TotalVentasDia;
     }
 
     public ArrayList<Venta> NombreYVentasDia(ArrayList<Venta> VentasRealizadas) {
         for (Venta not : VentasRealizadas) {
             LocalDate DateTimeConvertido = not.getFechaHora().toLocalDate();
             if (LocalDate.now().equals(DateTimeConvertido)) {
-                VentasDia.add(not);
+                this.VentasDia.add(not);
             }
         }
         return
-                VentasDia;
+                this.VentasDia;
     }
 
 }
