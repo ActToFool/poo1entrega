@@ -13,7 +13,8 @@ public class Moneda {
 
     private int denominacion;
     private int cantidad;
-    
+    private int cantidadInicialDia;
+
     //CONSTRUCTORES
     public Moneda() {
     }
@@ -21,9 +22,10 @@ public class Moneda {
     public Moneda(int denominacion, int cantidad) {
         this.denominacion = denominacion;
         this.cantidad = cantidad;
+        this.cantidadInicialDia = cantidad;
     }
-    //MODIFICADORES
 
+    //MODIFICADORES
     public int getDenominacion() {
         return denominacion;
     }
@@ -42,6 +44,14 @@ public class Moneda {
     
     public void modificarCantidad(int cantidad){
         this.cantidad = this.cantidad + cantidad;
+    }
+
+    public int getCantidadInicialDia() {
+        return cantidadInicialDia;
+    }
+
+    public void setCantidadInicialDia(int cantidadInicialDia) {
+        this.cantidadInicialDia = cantidadInicialDia;
     }
 
 }
