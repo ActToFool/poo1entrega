@@ -33,6 +33,7 @@ public class Venta {
     public Venta() {
         this.adicionalesSeleccionados = new ArrayList<>();
         this.pagoMonedas=new ArrayList<>();
+        this.productoVendido=new Producto();
     }
 
     //MODIFICADORES

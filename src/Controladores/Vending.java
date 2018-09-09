@@ -36,43 +36,52 @@ public class Vending {
         }
     }
 
-    public boolean pagoProductoVentaActual(ArrayList<Integer> monedas) {
-        Moneda aux;
-        for (int moneda : monedas) {
-            if(this.monedasExistentes(moneda)==-1){
-                return false;
+    public double pagoProductoVentaActual(ArrayList<Integer> monedas) {
+        ArrayList<Moneda> aux = this.monedasIngresadas(monedas);
+        if (aux.isEmpty() == false) {
+            this.ventaActual.setPagoMonedas(aux);
+            if (this.validarMonedas() >= 0) {
+                return this.validarMonedas();
             }
         }
-        if(monedas.size()==this.ventaActual.getPagoMonedas().size()){
-            return true;
-        }
-        return false;
+        return -1;
     }
+
+    public ArrayList<Moneda> monedasIngresadas(ArrayList<Integer> lista) {
+        for (Integer not : lista) {
+            if (this.monedasExistentes(not) == -1) {
+                this.ventaActual.getPagoMonedas().clear();
+                return this.ventaActual.getPagoMonedas();
+            }
+        }
+        return this.ventaActual.getPagoMonedas();
+    }
+
     //Funcion punto 4
     public boolean comprarProducto(String codigo, ArrayList<String> adicionales) {
         Producto productoVendido = verificarProductoAComprar(codigo);
-        ArrayList<Adicional> adi = productoVendido.disponibilidadAdicionales(adicionales);
-        if ((productoVendido != null) && (adi.isEmpty() == false)) {
-            if (this.verificarUnidades(productoVendido) && (productoVendido.validarObsequios() != null)) {
-                productoVendido.setAdicionalesProducto(adi);
-                //relacionar venta acual con producto Vendido
-                this.ventaActual.setProductoVendido(productoVendido);
-                //realizar conexion con adicionales seleccionados
-                this.ventaActual.setAdicionalesSeleccionados(adi);
-                if (this.crearNuevaVenta()) {
-                    return true;
+        if ((productoVendido != null)) {
+            ArrayList<Adicional> adi = productoVendido.disponibilidadAdicionales(adicionales);
+            if (adi.isEmpty() == false) {
+                if (this.verificarUnidades(productoVendido) && (productoVendido.validarObsequios() != null)) {
+                    if (this.crearNuevaVenta()) {
+                        productoVendido.setAdicionalesProducto(adi);
+                        //relacionar venta acual con producto Vendido
+                        this.ventaActual.setProductoVendido(productoVendido);
+                        //realizar conexion con adicionales seleccionados
+                        this.ventaActual.setAdicionalesSeleccionados(adi);
+                        return true;
+                    }
                 }
             }
         }
         return false;
     }
 
-    //funcion que valida las moendas ingresadas con el total de la venta actual
-    private boolean validarMonedas() {
-        if (this.totalMonedasIngresadas() <= this.valorTotalProducto()) {
-            return true;
-        }
-        return false;
+    //funcion que valida las moendas ingresadas con el total de la venta actual(era bool pero lo
+    //vamos a volver double para que retorne lo que sobra o lo que falta
+    private double validarMonedas() {
+        return this.totalMonedasIngresadas() - this.valorTotalProducto();
     }
 
     //funcion que le suma las monedas que ingreso el usuario a la lista de monedas de la maquina
@@ -128,29 +137,43 @@ public class Vending {
         return this.valorProducto() + this.totalAdicionales();
     }
 
+    public double getValorTotalProducto() {
+        return this.valorTotalProducto();
+    }
+
     //Funcion privada que verifica si hay unidades disponibles del producto
     private boolean verificarUnidades(Producto productoActual) {
         return productoActual.getUnidadesDisponibles() > 0;
     }
+
     //retorna la cantidad de monedas que hay en la maquina de una denominacion
     public int monedasExistentes(int denominacion) {
         Moneda aux;
         if ((denominacion == 50) || (denominacion == 100) || (denominacion == 200) || (denominacion == 500) || (denominacion == 1000)) {
-            aux=this.ventaActual.buscarMonedaDenominacionVenta(denominacion);
+            aux = this.ventaActual.buscarMonedaDenominacionVenta(denominacion);
             if (aux != null) {
-                aux.setCantidad(buscarMonedaDenominacion(denominacion).getCantidad() + 1);
+                aux.setCantidad(aux.getCantidad() + 1);
             } else {
                 Moneda m = new Moneda(denominacion, 1);
                 this.ventaActual.getPagoMonedas().add(m);
             }
-            aux=this.buscarMonedaDenominacion(denominacion);
-            aux.setCantidad(buscarMonedaDenominacion(denominacion).getCantidad() + 1);
+            aux = this.buscarMonedaDenominacion(denominacion);
+            aux.setCantidad(aux.getCantidad() + 1);
             return aux.getCantidad();
         } else {
             return -1;
         }
     }
 
+    //devuelte saldo sobrante
+    public void devolverRestante() {
+        if (this.validarMonedas() > 0) {
+            //bobohijueputa emmanuel :3
+
+        }
+    }
+
+    //eliminar monedas de 
     //busca en la lista por denominacion y retorna la cantidad actual
     public Moneda buscarMonedaDenominacion(int denominacion) {
         for (Moneda moneda : dineroAcumulado) {
@@ -188,7 +211,7 @@ public class Vending {
         this.catalogo = this.gestion.crearProductos();
         this.ventaActual = new Venta();
         this.ventasRealizadas = new ArrayList<>();
-        this.dineroAcumulado=this.gestion.dineroAcumulado();
+        this.dineroAcumulado = this.gestion.dineroAcumulado();
     }
 
     //MODIFICADORES
