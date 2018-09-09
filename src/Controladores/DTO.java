@@ -8,7 +8,6 @@ package Controladores;
 import Entidades.Venta;
 import Entidades.Moneda;
 import Entidades.Producto;
-import Controladores.Vending;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -19,11 +18,19 @@ import java.util.ArrayList;
 public class DTO {
 //Punto 7
 
-    int TotalVentasDia = 0;
-    ArrayList<Venta> VentasDia = new ArrayList<>();
-    ArrayList<Producto> NoVendidos = new ArrayList<>();
-    //Valor total ventas del día (Parte a) 
+    int TotalVentasDia;
+    ArrayList<Venta> productoVendidoDia;
+    ArrayList<Producto> NoVendidos;
+    int cuadreCaja;
 
+    public DTO() {
+        this.TotalVentasDia = 0;
+        this.productoVendidoDia = new ArrayList<>();
+        this.NoVendidos = new ArrayList<>();
+        this.cuadreCaja=0;
+    }
+
+    //Valor total ventas del día (Parte a) 
     public int valorTotalVentasDia(ArrayList<Venta> VentasRealizadas) {
         for (Venta not : VentasRealizadas) {
             LocalDate DateTimeConvertido = not.getFechaHora().toLocalDate();
@@ -39,10 +46,10 @@ public class DTO {
         for (Venta not : VentasRealizadas) {
             LocalDate DateTimeConvertido = not.getFechaHora().toLocalDate();
             if (LocalDate.now().equals(DateTimeConvertido)) {
-                this.VentasDia.add(not);
+                this.productoVendidoDia.add(not);
             }
         }
-        return this.VentasDia;
+        return this.productoVendidoDia;
     }
 
 //Parte c
@@ -68,12 +75,12 @@ public class DTO {
             for (Venta VentasRealizada : VentasRealizadas) {
                 LocalDate DateTimeConvertido = VentasRealizada.getFechaHora().toLocalDate();
                 if (LocalDate.now().equals(DateTimeConvertido)) {
-                    if(catalogo.contains(VentasRealizada.getProductoVendido())==false){
+                    if (catalogo.contains(VentasRealizada.getProductoVendido()) == false) {
                         this.NoVendidos.add(VentasRealizada.getProductoVendido());
                     }
                 }
-                }
-            }return NoVendidos;
-        } 
+            }
+        }
+        return NoVendidos;
     }
-
+}

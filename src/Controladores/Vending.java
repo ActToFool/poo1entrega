@@ -23,6 +23,35 @@ public class Vending {
     private ArrayList<Venta> ventasRealizadas;
     private Venta ventaActual;
     private ArrayList<Moneda> dineroAcumulado;
+    private DTO reportes;
+
+    public void setReportes(DTO reportes) {
+        this.reportes = reportes;
+    }
+
+    public int valorTotalVentasDia() {
+        return this.reportes.valorTotalVentasDia(this.ventasRealizadas);
+    }
+
+    public ArrayList<Venta> productoVendidoDia() {
+        return this.reportes.productoVendidoDia(this.ventasRealizadas);
+    }
+
+    public int cuadreCaja() {
+        return this.reportes.cuadreCaja(ventasRealizadas);
+    }
+
+    public ArrayList<Producto> productosNoVendidos() {
+        return this.reportes.productosNoVendidos(this.ventasRealizadas, this.catalogo);
+    }
+
+    public DTO getReportes() {
+        this.reportes.NoVendidos=this.productosNoVendidos();
+        this.reportes.TotalVentasDia=this.valorTotalVentasDia();
+        this.reportes.productoVendidoDia=this.productoVendidoDia();
+        this.reportes.cuadreCaja=this.cuadreCaja();
+        return this.reportes;
+    }
 
     //¿no se ingresan monedas en esta funcion?
     public boolean crearNuevaVenta() {
@@ -166,17 +195,17 @@ public class Vending {
     }
 
     //devuelte saldo sobrante
-    public ArrayList<Moneda> devolverRestante(){
+    public ArrayList<Moneda> devolverRestante() {
         ArrayList<Moneda> monedaADevolver = new ArrayList<>();
         int vueltos = (int) this.validarMonedas();
-        if(vueltos >= 0){  
-            int iter = (this.dineroAcumulado.size()-1);
-            while(vueltos > 0){
+        if (vueltos >= 0) {
+            int iter = (this.dineroAcumulado.size() - 1);
+            while (vueltos > 0) {
                 Moneda actual = this.dineroAcumulado.get(iter);
                 Moneda mon = new Moneda();
                 mon.setDenominacion(actual.getDenominacion());
-                mon.setCantidad(vueltos/actual.getDenominacion());
-                if(mon.getCantidad()>0 && actual.getCantidad()>=mon.getCantidad()){
+                mon.setCantidad(vueltos / actual.getDenominacion());
+                if (mon.getCantidad() > 0 && actual.getCantidad() >= mon.getCantidad()) {
                     monedaADevolver.add(mon);
                     //se deben eliminar las monedas de la relacion pagoMonedas,
                     //pero, al esta ya estar modificada en dinero acumulado sólo
@@ -187,24 +216,25 @@ public class Vending {
                 }
                 vueltos %= actual.getDenominacion();
                 iter--;
-                
+
             }
-        }
-        else{
-            monedaADevolver=this.ventaActual.getPagoMonedas();
-            this.ventaActual=null;
-            this.ventaActual=new Venta();
+        } else {
+            monedaADevolver = this.ventaActual.getPagoMonedas();
+            this.ventaActual = null;
+            this.ventaActual = new Venta();
         }
         return monedaADevolver;
     }
+
     //formatea las vueltas y retorna un string
-    public String formatearVueltas(){
+    public String formatearVueltas() {
         String aux = "";
         for (Moneda moneda : this.devolverRestante()) {
-            aux=aux.concat("\nMoneda: "+moneda.getDenominacion()+" Cantidad: "+moneda.getCantidad()+"\n");
+            aux = aux.concat("\nMoneda: " + moneda.getDenominacion() + " Cantidad: " + moneda.getCantidad() + "\n");
         }
         return aux;
     }
+
     //eliminar monedas de 
     //busca en la lista por denominacion y retorna la cantidad actual
     public Moneda buscarMonedaDenominacion(int denominacion) {
@@ -244,6 +274,7 @@ public class Vending {
         this.ventaActual = new Venta();
         this.ventasRealizadas = new ArrayList<>();
         this.dineroAcumulado = this.gestion.dineroAcumulado();
+        this.reportes=new DTO();
     }
 
     //MODIFICADORES

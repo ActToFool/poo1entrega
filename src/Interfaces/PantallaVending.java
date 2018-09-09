@@ -5,6 +5,7 @@
  */
 package Interfaces;
 
+import Controladores.DTO;
 import Controladores.Vending;
 import Entidades.Moneda;
 import java.util.ArrayList;
@@ -71,7 +72,7 @@ public class PantallaVending {
                 }
             }
         }
-
+        //DTO reportes = this.vending.getReportes();
     }
 
     //pide los adicionales
