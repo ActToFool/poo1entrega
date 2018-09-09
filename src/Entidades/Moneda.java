@@ -39,5 +39,9 @@ public class Moneda {
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
+    
+    public void modificarCantidad(int cantidad){
+        this.cantidad = this.cantidad + cantidad;
+    }
 
 }

@@ -169,7 +169,7 @@ public class Vending {
     public ArrayList<Moneda> devolverRestante(){
         ArrayList<Moneda> monedaADevolver = new ArrayList<>();
         int vueltos = (int) this.validarMonedas();
-        if(vueltos > 0){
+        if(vueltos > 0){  
             int iter = (this.dineroAcumulado.size()-1);
             while(vueltos > 0){
                 Moneda actual = this.dineroAcumulado.get(iter);
@@ -178,6 +178,10 @@ public class Vending {
                 mon.setCantidad(vueltos/actual.getDenominacion());
                 if(mon.getCantidad()>0){
                     monedaADevolver.add(mon);
+                    //se deben eliminar las monedas de la relacion pagoMonedas,
+                    //pero, al esta ya estar modificada en dinero acumulado sólo
+                    //usaremos la relacion dineroAcumulado
+                    this.buscarMonedaDenominacion(mon.getDenominacion()).modificarCantidad(-mon.getCantidad());
                 }
                 vueltos %= actual.getDenominacion();
                 iter--;
