@@ -15,23 +15,29 @@ import java.util.ArrayList;
  */
 public class DTO {
 
+    int TotalVentasDia = 0;
+    ArrayList<Venta> VentasDia = new ArrayList<>();
     //Valor total ventas del día
-    
+
     public int ValorTotalVentasDia(ArrayList<Venta> VentasRealizadas) {
-       int TotalVentasDia=0, VentaProducto=0;
-       
         for (Venta not : VentasRealizadas) {
             LocalDate DateTimeConvertido = not.getFechaHora().toLocalDate();
-            if (LocalDate.now().equals(DateTimeConvertido)){
-                TotalVentasDia+=not.getProductoVendido().getPrecio();
+            if (LocalDate.now().equals(DateTimeConvertido)) {
+                TotalVentasDia += not.getProductoVendido().getPrecio();
             }
         }
         return TotalVentasDia;
     }
-    
 
-
-
+    public ArrayList<Venta> NombreYVentasDia(ArrayList<Venta> VentasRealizadas) {
+        for (Venta not : VentasRealizadas) {
+            LocalDate DateTimeConvertido = not.getFechaHora().toLocalDate();
+            if (LocalDate.now().equals(DateTimeConvertido)) {
+                VentasDia.add(not);
+            }
+        }
+        return
+                VentasDia;
     }
-    
 
+}
