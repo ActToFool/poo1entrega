@@ -26,7 +26,6 @@ public class PantallaVending {
 
         //pide los adicionales y lo ingresa a la lista
         pantalla.recibirAdicionales(codigo);
-        
 
     }
 
@@ -45,33 +44,28 @@ public class PantallaVending {
     public void recibirMonedas() {
         ArrayList<Integer> monedasIngresadas = new ArrayList<>();
         int monedita = 0;
-        int acum=0;
-        double auxtotal=this.vending.getValorTotalProducto();
-        JOptionPane.showMessageDialog(null,"El valor a pagar es: "+ auxtotal);
+        int acum = 0;
+        double auxtotal = this.vending.getValorTotalProducto();
+        JOptionPane.showMessageDialog(null, "El valor a pagar es: " + auxtotal);
         do {
-            monedita = Integer.parseInt(JOptionPane.showInputDialog("Ingrese una moneda(''0'' si no ingresará más) EL valor restante es: "+(auxtotal-acum)));
-            acum+=monedita;
-            if((auxtotal-acum)<0){
-                acum=(int) auxtotal;
+            monedita = Integer.parseInt(JOptionPane.showInputDialog("Ingrese una moneda(''0'' si no ingresará más) EL valor restante es: " + (auxtotal - acum)));
+            acum += monedita;
+            if ((auxtotal - acum) < 0) {
+                acum = (int) auxtotal;
             }
             monedasIngresadas.add(monedita);
         } while (monedita != 0);
-        monedasIngresadas.remove(monedasIngresadas.size()-1);
-        double bandera=this.vending.pagoProductoVentaActual(monedasIngresadas);
-        if(bandera==0.0){
+        monedasIngresadas.remove(monedasIngresadas.size() - 1);
+        double bandera = this.vending.pagoProductoVentaActual(monedasIngresadas);
+        if (bandera == 0.0) {
             JOptionPane.showMessageDialog(null, "Disfrute su producto :) ");
-        }
-        else{
-            if(bandera>0.0){
+        } else {
+            if (bandera > 0.0) {
                 ArrayList<Moneda> vueltos = this.vending.devolverRestante();
-                int cont = 0;
-                while(cont < vueltos.size()){
-                    JOptionPane.showMessageDialog(null, "toca dar vueltas monedas de:" + vueltos.get(cont).getDenominacion() + ("Cantidad: ") + vueltos.get(cont).getCantidad());
-                    cont++;
-                }
-                
-            }else{
-                if(bandera==-1){
+                JOptionPane.showMessageDialog(null, "Toca dar vueltas monedas de:" + this.vending.formatearVueltas());
+
+            } else {
+                if (bandera == -1) {
                     JOptionPane.showMessageDialog(null, "Pago fallido");
                 }
             }
@@ -90,7 +84,7 @@ public class PantallaVending {
             adicionales.add(aux);
         } while ((aux.compareTo("no") != 0));
         adicionales.remove(aux); //se elimina el último agregado que es el "no"
-        
+
         //empieza la venta del producto
         if (this.vending.comprarProducto(codigo, adicionales)) {
             //llama a la que recibe monedas

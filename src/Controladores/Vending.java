@@ -176,41 +176,26 @@ public class Vending {
                 Moneda mon = new Moneda();
                 mon.setDenominacion(actual.getDenominacion());
                 mon.setCantidad(vueltos/actual.getDenominacion());
-                monedaADevolver.add(mon);
+                if(mon.getCantidad()>0){
+                    monedaADevolver.add(mon);
+                }
                 vueltos %= actual.getDenominacion();
                 iter--;
                 
             }
             
             return monedaADevolver;
-            
-            /*Moneda mon1 = new Moneda();
-            mon1.setDenominacion(1000);
-            mon1.setCantidad(vueltos/1000);
-            vueltos = vueltos % 1000;
-            monedaADevolver.add(mon1);
-            
-            Moneda mon2 = new Moneda();
-            mon2.setDenominacion(500);
-            mon2.setCantidad(vueltos/500);
-            vueltos = vueltos % 500;
-            monedaADevolver.add(mon2);
-            
-            Moneda mon3 = new Moneda();
-            mon3.setDenominacion(200);
-            mon3.setCantidad(vueltos/200);
-            vueltos = vueltos % 200;
-            monedaADevolver.add(mon3);
-            
-            Moneda mon4 = new Moneda();
-            mon4.setDenominacion(100);
-            mon4.setCantidad(vueltos/100);
-            vueltos = vueltos % 100;
-            monedaADevolver.add(mon4);*/
         }
         return null;
     }
-
+    //formatea las vueltas y retorna un string
+    public String formatearVueltas(){
+        String aux = "";
+        for (Moneda moneda : this.devolverRestante()) {
+            aux=aux.concat("\n101Moneda: "+moneda.getDenominacion()+" Cantidad: "+moneda.getCantidad()+"\n");
+        }
+        return aux;
+    }
     //eliminar monedas de 
     //busca en la lista por denominacion y retorna la cantidad actual
     public Moneda buscarMonedaDenominacion(int denominacion) {
