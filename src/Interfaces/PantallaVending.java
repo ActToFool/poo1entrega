@@ -44,16 +44,30 @@ public class PantallaVending {
     public void recibirMonedas() {
         ArrayList<Integer> monedasIngresadas = new ArrayList<>();
         int monedita = 0;
+        int acum=0;
+        double auxtotal=this.vending.getValorTotalProducto();
+        JOptionPane.showMessageDialog(null,"El valor a pagar es: "+ auxtotal);
         do {
-            monedita = Integer.parseInt(JOptionPane.showInputDialog("Ingrese una moneda(''0'' si no desea más)"));
+            monedita = Integer.parseInt(JOptionPane.showInputDialog("Ingrese una moneda(''0'' si no ingresará más) EL valor restante es: "+(auxtotal-acum)));
+            acum+=monedita;
+            if((auxtotal-acum)<0){
+                acum=(int) auxtotal;
+            }
             monedasIngresadas.add(monedita);
         } while (monedita != 0);
         monedasIngresadas.remove(monedasIngresadas.size()-1);
-        if(this.vending.pagoProductoVentaActual(monedasIngresadas)){
+        double bandera=this.vending.pagoProductoVentaActual(monedasIngresadas);
+        if(bandera==0.0){
             JOptionPane.showMessageDialog(null, "Disfrute su producto :) ");
         }
         else{
-            JOptionPane.showMessageDialog(null, "Pago fallido");
+            if(bandera>0.0){
+                JOptionPane.showMessageDialog(null, "toca dar vueltas");
+            }else{
+                if(bandera==-1){
+                    JOptionPane.showMessageDialog(null, "Pago fallido");
+                }
+            }
         }
 
     }

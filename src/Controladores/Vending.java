@@ -36,17 +36,28 @@ public class Vending {
         }
     }
 
-    public boolean pagoProductoVentaActual(ArrayList<Integer> monedas) {
-        Moneda aux;
-        for (int moneda : monedas) {
-            if(this.monedasExistentes(moneda)==-1){
-                return false;
+    public double pagoProductoVentaActual(ArrayList<Integer> monedas) {
+        ArrayList<Moneda> aux=this.monedasIngresadas(monedas);
+        if(aux.isEmpty()==false){
+            this.ventaActual.setPagoMonedas(aux);
+            if(this.validarMonedas()>=0){
+                return this.validarMonedas();
             }
         }
-        if(monedas.size()==this.ventaActual.getPagoMonedas().size()){
-            return true;
+        return -1;
+    }
+    public ArrayList<Moneda> monedasIngresadas(ArrayList<Integer> lista){
+        ArrayList<Moneda> aux=new ArrayList<>();
+        for (Integer not : lista) {
+            if ((not == 50) || (not == 100) || (not == 200) || (not == 500) || (not == 1000)){
+                Moneda m=new Moneda(not,1);
+                aux.add(m);
+            }
         }
-        return false;
+        if(aux.size()!=lista.size()){
+            aux.clear();
+        }
+        return aux;
     }
     //Funcion punto 4
     public boolean comprarProducto(String codigo, ArrayList<String> adicionales) {
@@ -54,12 +65,12 @@ public class Vending {
         ArrayList<Adicional> adi = productoVendido.disponibilidadAdicionales(adicionales);
         if ((productoVendido != null) && (adi.isEmpty() == false)) {
             if (this.verificarUnidades(productoVendido) && (productoVendido.validarObsequios() != null)) {
-                productoVendido.setAdicionalesProducto(adi);
+                if (this.crearNuevaVenta()) {
+                    productoVendido.setAdicionalesProducto(adi);
                 //relacionar venta acual con producto Vendido
                 this.ventaActual.setProductoVendido(productoVendido);
                 //realizar conexion con adicionales seleccionados
                 this.ventaActual.setAdicionalesSeleccionados(adi);
-                if (this.crearNuevaVenta()) {
                     return true;
                 }
             }
@@ -67,12 +78,10 @@ public class Vending {
         return false;
     }
 
-    //funcion que valida las moendas ingresadas con el total de la venta actual
-    private boolean validarMonedas() {
-        if (this.totalMonedasIngresadas() <= this.valorTotalProducto()) {
-            return true;
-        }
-        return false;
+    //funcion que valida las moendas ingresadas con el total de la venta actual(era bool pero lo
+    //vamos a volver double para que retorne lo que sobra o lo que falta
+    private double validarMonedas() {
+        return this.totalMonedasIngresadas()-this.valorTotalProducto();
     }
 
     //funcion que le suma las monedas que ingreso el usuario a la lista de monedas de la maquina
@@ -127,7 +136,9 @@ public class Vending {
     private double valorTotalProducto() {
         return this.valorProducto() + this.totalAdicionales();
     }
-
+    public double getValorTotalProducto(){
+        return this.valorTotalProducto();
+    }
     //Funcion privada que verifica si hay unidades disponibles del producto
     private boolean verificarUnidades(Producto productoActual) {
         return productoActual.getUnidadesDisponibles() > 0;
