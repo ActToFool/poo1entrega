@@ -176,7 +176,7 @@ public class Vending {
                 Moneda mon = new Moneda();
                 mon.setDenominacion(actual.getDenominacion());
                 mon.setCantidad(vueltos/actual.getDenominacion());
-                if(mon.getCantidad()>0){
+                if(mon.getCantidad()>0 && actual.getCantidad()>=mon.getCantidad()){
                     monedaADevolver.add(mon);
                     //se deben eliminar las monedas de la relacion pagoMonedas,
                     //pero, al esta ya estar modificada en dinero acumulado sólo
