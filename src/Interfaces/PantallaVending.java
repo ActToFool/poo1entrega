@@ -47,9 +47,8 @@ public class PantallaVending {
         do {
             monedita = Integer.parseInt(JOptionPane.showInputDialog("Ingrese una moneda(''0'' si no desea más)"));
             monedasIngresadas.add(monedita);
-
         } while (monedita != 0);
-        monedasIngresadas.remove(monedita);
+        monedasIngresadas.remove(monedasIngresadas.size()-1);
         if(this.vending.pagoProductoVentaActual(monedasIngresadas)){
             JOptionPane.showMessageDialog(null, "Disfrute su producto :) ");
         }
