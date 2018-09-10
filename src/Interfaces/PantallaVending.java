@@ -66,6 +66,7 @@ public class PantallaVending {
 
             } else {
                 if (bandera == -1) {
+                    JOptionPane.showMessageDialog(null, "Devolución: "+this.vending.formatearVueltas());
                     JOptionPane.showMessageDialog(null, "Pago fallido");
                 }
             }

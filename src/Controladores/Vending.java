@@ -169,7 +169,7 @@ public class Vending {
     public ArrayList<Moneda> devolverRestante(){
         ArrayList<Moneda> monedaADevolver = new ArrayList<>();
         int vueltos = (int) this.validarMonedas();
-        if(vueltos > 0){  
+        if(vueltos >= 0){  
             int iter = (this.dineroAcumulado.size()-1);
             while(vueltos > 0){
                 Moneda actual = this.dineroAcumulado.get(iter);
@@ -182,15 +182,20 @@ public class Vending {
                     //pero, al esta ya estar modificada en dinero acumulado sólo
                     //usaremos la relacion dineroAcumulado
                     this.buscarMonedaDenominacion(mon.getDenominacion()).modificarCantidad(-mon.getCantidad());
+                    this.ventasRealizadas.add(this.ventaActual);
+                    //NO CREAMOS LA NUEVA VENTA ACÁ PORQUE LA ESTAMOS CREANDO EN LA FUNCION CREAR PRODUCTO
                 }
                 vueltos %= actual.getDenominacion();
                 iter--;
                 
             }
-            
-            return monedaADevolver;
         }
-        return null;
+        else{
+            monedaADevolver=this.ventaActual.getPagoMonedas();
+            this.ventaActual=null;
+            this.ventaActual=new Venta();
+        }
+        return monedaADevolver;
     }
     //formatea las vueltas y retorna un string
     public String formatearVueltas(){
