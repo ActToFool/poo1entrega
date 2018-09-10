@@ -38,7 +38,7 @@ public class Vending {
     }
 
     public int cuadreCaja() {
-        return this.reportes.cuadreCaja(ventasRealizadas);
+        return this.reportes.cuadreCaja(this.dineroAcumulado);
     }
 
     public ArrayList<Producto> productosNoVendidos() {
@@ -46,10 +46,10 @@ public class Vending {
     }
 
     public DTO getReportes() {
-        this.reportes.NoVendidos=this.productosNoVendidos();
-        this.reportes.TotalVentasDia=this.valorTotalVentasDia();
-        this.reportes.productoVendidoDia=this.productoVendidoDia();
-        this.reportes.cuadreCaja=this.cuadreCaja();
+        this.reportes.setNoVendidos(this.productosNoVendidos());
+        this.reportes.setTotalVentasDia(this.valorTotalVentasDia());
+        this.reportes.setProductoVendidoDia(this.productoVendidoDia());
+        this.reportes.setCuadreCaja(this.cuadreCaja());
         return this.reportes;
     }
 
@@ -234,7 +234,20 @@ public class Vending {
         }
         return aux;
     }
-
+    public String formatearNoVendidos() {
+        String aux = "Los Productos no vendidos son: \n";
+        for (Producto p : this.reportes.getNoVendidos()){
+            aux = aux.concat("\n Producto: " + p.getCodigo()+ " Cantidad: " + p.getUnidadesDisponibles() + "\n");
+        }
+        return aux;
+    }
+    public String formatearVendidosDia() {
+        String aux = "Los Productos vendidos son: \n";
+        for (Venta v : this.reportes.getProductoVendidoDia()){
+            aux = aux.concat("\n Producto: " + v.getProductoVendido().getCodigo()+ " Cantidad: 1 \n");
+        }
+        return aux;
+    }
     //eliminar monedas de 
     //busca en la lista por denominacion y retorna la cantidad actual
     public Moneda buscarMonedaDenominacion(int denominacion) {

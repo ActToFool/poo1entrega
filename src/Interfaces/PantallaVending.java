@@ -7,7 +7,9 @@ package Interfaces;
 
 import Controladores.DTO;
 import Controladores.Vending;
+import Entidades.Adicional;
 import Entidades.Moneda;
+import Entidades.Producto;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -22,16 +24,46 @@ public class PantallaVending {
     public static void main(String[] args) {
         //AQUI IBA EL MAIN
         PantallaVending pantalla = new PantallaVending();
-        //recibe el codigo del producto a comprar
-        String codigo = pantalla.recibirCodigo();
-
-        //pide los adicionales y lo ingresa a la lista
-        pantalla.recibirAdicionales(codigo);
-
+        int opcion;
+        do{
+            opcion = Integer.parseInt(JOptionPane.showInputDialog("Ingrese: \n 1 -> Ingresar Producto \n 2 -> Probar para los casos positivos y negativos \n 3 -> Reportes \n 4-> Salir"));
+            pantalla.menuP(opcion);
+        }while(opcion!=4);
     }
 
-    public void mensajeErrorProducto() {
-        JOptionPane.showMessageDialog(null, "El producto no se encuentra disponible ");
+    public void menuP(int opcion) {
+        switch (opcion) {
+            case 1:
+                //recibe el codigo del producto a comprar
+                String codigo = this.recibirCodigo();
+                //pide los adicionales y lo ingresa a la lista
+                this.recibirAdicionales(codigo);
+                break;
+            case 2:
+                //seteado producto 1, caso en que todo este bien
+                String codigo1="101";
+                ArrayList<String> a = new ArrayList<>();
+                a.add("Azucar");
+                this.vending.comprarProducto(codigo1, a);
+                ArrayList<Integer> monedas1;
+                
+                //seteado producto 1, caso en que el codigo del producto este mal
+                String codigo2="106";
+                ArrayList<String> a1 = new ArrayList<>();
+                a1.add("Azucar");
+                this.vending.comprarProducto(codigo2, a1);
+                break;
+            case 3:
+                DTO d=this.vending.getReportes();
+                JOptionPane.showMessageDialog(null, "El cuadre de caja es: "+d.getCuadreCaja());
+                JOptionPane.showMessageDialog(null, this.vending.formatearNoVendidos());
+                JOptionPane.showMessageDialog(null, "El total de ventas del dia es: "+d.getTotalVentasDia());
+                JOptionPane.showMessageDialog(null, "El cuadre de caja es: "+this.vending.formatearVendidosDia());
+                break;
+            case 4:
+                JOptionPane.showMessageDialog(null, "Gracias por usar el programa");
+                break;
+        }
     }
 
     /*public void imprimirAdicionalesProducto(String codigo){
@@ -49,7 +81,7 @@ public class PantallaVending {
         double auxtotal = this.vending.getValorTotalProducto();
         JOptionPane.showMessageDialog(null, "El valor a pagar es: " + auxtotal);
         do {
-            monedita = Integer.parseInt(JOptionPane.showInputDialog("Ingrese una moneda(''0'' si no ingresará más) EL valor restante es: " + (auxtotal - acum)));
+            monedita = Integer.parseInt(JOptionPane.showInputDialog("Ingrese una moneda(''0'' si no ingresará más) El valor restante es: " + (auxtotal - acum)));
             acum += monedita;
             if ((auxtotal - acum) < 0) {
                 acum = (int) auxtotal;
@@ -67,12 +99,11 @@ public class PantallaVending {
 
             } else {
                 if (bandera == -1) {
-                    JOptionPane.showMessageDialog(null, "Devolución: "+this.vending.formatearVueltas());
+                    JOptionPane.showMessageDialog(null, "Devolución: " + this.vending.formatearVueltas());
                     JOptionPane.showMessageDialog(null, "Pago fallido");
                 }
             }
         }
-        //DTO reportes = this.vending.getReportes();
     }
 
     //pide los adicionales

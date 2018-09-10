@@ -30,6 +30,10 @@ public class Producto {
     }
 
     //Verifica si un obsequio tiene disponibilidades
+    public Producto(String codigo) {
+        this.codigo = codigo;
+    }
+
     //si las tienes, retorna ese mismo obsequio
     public Producto validarObsequios() {
         for (Producto obsequio : this.obsequios) {
@@ -61,10 +65,18 @@ public class Producto {
                 }
             }
         }
-        if(adiciones.size()!=lista.size()){
+        if (adiciones.size() != lista.size()) {
             lista.clear();
         }
         return lista;
+    }
+
+    public int totalValorAdicionales() {
+        int acum=0;
+        for (Adicional adicional : this.adicionalesProducto) {
+            acum+=adicional.getPrecio();
+        }
+        return acum;
     }
 
     public Adicional buscarAdicionalNombre(String buscar) {
